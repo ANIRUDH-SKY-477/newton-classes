@@ -9,6 +9,26 @@
   <link rel="stylesheet" href="style.css">
   <script src="script.js" defer></script>
 </head>
+  
+  <div id="admissionPopup" class="admission-popup" hidden
+       role="dialog" aria-modal="true"
+       aria-labelledby="admissionPopupTitle">
+    <div class="admission-popup-card">
+      <img src="newton-logo.png" alt="NEWTON CLASSES Logo">
+      <p class="eyebrow">NEW SESSION ADMISSIONS</p>
+      <h2 id="admissionPopupTitle">Admission Open!</h2>
+      <p>NEWTON CLASSES mein admission ke liye form bharein.</p>
+      <button type="button" id="openAdmissionForm"
+              class="button admission-popup-primary">
+        Admission Form
+      </button>
+      <button type="button" id="ignoreAdmissionPopup"
+              class="button admission-popup-secondary">
+        Ignore for now
+      </button>
+    </div>
+  </div>
+  
 <body>
   <header class="site-header">
     <a class="brand" href="#home" aria-label="NEWTON CLASSES home">
