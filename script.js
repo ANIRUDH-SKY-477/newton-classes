@@ -61,3 +61,36 @@ if (admissionForm) {
     window.open(whatsappURL, "_blank");
   });
 }
+
+const admissionPopup = document.getElementById("admissionPopup");
+const openAdmissionFormButton = document.getElementById("openAdmissionForm");
+const ignoreAdmissionPopupButton = document.getElementById("ignoreAdmissionPopup");
+const admissionFormSection = document.getElementById("admission");
+
+if (admissionPopup) {
+  admissionPopup.hidden = false;
+}
+
+if (ignoreAdmissionPopupButton && admissionPopup) {
+  ignoreAdmissionPopupButton.addEventListener("click", () => {
+    admissionPopup.hidden = true;
+  });
+}
+
+if (openAdmissionFormButton && admissionPopup) {
+  openAdmissionFormButton.addEventListener("click", () => {
+    admissionPopup.hidden = true;
+
+    if (admissionFormSection) {
+      admissionFormSection.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+
+      const firstField = admissionFormSection.querySelector("input");
+      if (firstField) {
+        setTimeout(() => firstField.focus({ preventScroll: true }), 500);
+      }
+    }
+  });
+}
