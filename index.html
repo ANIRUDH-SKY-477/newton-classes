@@ -111,6 +111,68 @@
       </div>
     </section>
 
+    <section class="section admission-section" id="admission">
+      <div class="admission-form-card">
+        <div class="admission-form-header">
+          <img src="newton-logo.png" alt="NEWTON CLASSES Logo">
+          <h2>NEWTON CLASSES</h2>
+          <p>Learn Today. Lead Tomorrow.</p>
+          <h3>ADMISSION FORM</h3>
+          <p>Please fill in all student details.</p>
+        </div>
+
+        <form id="admissionForm">
+          <label for="studentName">Name of Student *</label>
+          <input id="studentName" name="studentName" required>
+
+          <label for="fatherName">Father's name *</label>
+          <input id="fatherName" name="fatherName" required>
+
+          <label for="fatherOccupation">Father's Occupation *</label>
+          <input id="fatherOccupation" name="fatherOccupation" required>
+
+          <label for="motherName">Mother name *</label>
+          <input id="motherName" name="motherName" required>
+
+          <label for="motherOccupation">Mother's Occupation *</label>
+          <input id="motherOccupation" name="motherOccupation" required>
+
+          <label for="studentClass">Class *</label>
+          <select id="studentClass" name="studentClass" required>
+            <option value="">Select Class</option>
+            <option>Class 6</option>
+            <option>Class 7</option>
+            <option>Class 8</option>
+            <option>Class 9</option>
+            <option>Class 10</option>
+            <option>Class 11</option>
+            <option>Class 12</option>
+          </select>
+
+          <label for="school">School *</label>
+          <input id="school" name="school" required>
+
+          <label for="address">Address *</label>
+          <textarea id="address" name="address" rows="3" required></textarea>
+
+          <label for="previousInstitute">Previous institute/coaching centre</label>
+          <input id="previousInstitute" name="previousInstitute">
+
+          <label for="phoneNumber">Phone number *</label>
+          <input id="phoneNumber" name="phoneNumber"
+                 type="tel" inputmode="numeric"
+                 pattern="[0-9]{10}" maxlength="10" required>
+
+          <button type="submit" class="button admission-submit">
+            Submit Application via WhatsApp
+          </button>
+          <p class="form-note">
+            Your details will open in WhatsApp for you to send.
+          </p>
+        </form>
+      </div>
+    </section>
+    
     <section class="admission-band">
       <div><p class="eyebrow">ADMISSIONS & ENQUIRIES</p><h2>Ready to take the next step?</h2><p>Contact us to ask about classes, subjects, and batch timings.</p></div>
       <a class="button button-light" href="https://wa.me/918877546941?text=Hello%20NEWTON%20CLASSES%2C%20please%20share%20admission%20and%20course%20details." target="_blank" rel="noopener">Chat on WhatsApp ↗</a>
