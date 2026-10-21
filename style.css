@@ -107,3 +107,101 @@
     padding: 32px 12px;
   }
 }
+
+/* NEWTON CLASSES Admission Popup */
+.admission-popup[hidden] {
+  display: none !important;
+}
+
+.admission-popup {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+  background: rgba(7, 18, 42, 0.72);
+  backdrop-filter: blur(5px);
+}
+
+.admission-popup-card {
+  width: 100%;
+  max-width: 390px;
+  box-sizing: border-box;
+  padding: 28px 22px;
+  border-radius: 18px;
+  border-top: 5px solid #1458c8;
+  background: #ffffff;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+  text-align: center;
+  animation: admissionPopupIn 0.25s ease-out;
+}
+
+.admission-popup-card img {
+  width: 82px;
+  height: 82px;
+  object-fit: contain;
+  margin-bottom: 10px;
+}
+
+.admission-popup-card .eyebrow {
+  color: #1458c8;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+  margin: 5px 0 8px;
+}
+
+.admission-popup-card h2 {
+  color: #123d83;
+  font-size: 26px;
+  margin: 8px 0;
+}
+
+.admission-popup-card > p:not(.eyebrow) {
+  color: #53647d;
+  line-height: 1.6;
+  margin: 10px 0 20px;
+}
+
+.admission-popup-card button {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 13px 16px;
+  border-radius: 9px;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.admission-popup-card .admission-popup-primary {
+  color: #ffffff;
+  background: #1458c8;
+  border: 2px solid #1458c8;
+}
+
+.admission-popup-card .admission-popup-secondary {
+  color: #23436f;
+  background: #edf3ff;
+  border: 2px solid #d8e5ff;
+}
+
+@keyframes admissionPopupIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .admission-popup-card {
+    animation: none;
+  }
+}
