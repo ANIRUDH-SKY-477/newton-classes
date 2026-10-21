@@ -21,3 +21,43 @@ if (menuButton && nav) {
 
 const year = document.getElementById("year");
 if (year) year.textContent = new Date().getFullYear();
+
+const admissionForm = document.getElementById("admissionForm");
+
+if (admissionForm) {
+  admissionForm.addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    const studentName = document.getElementById("studentName").value.trim();
+    const fatherName = document.getElementById("fatherName").value.trim();
+    const fatherOccupation = document.getElementById("fatherOccupation").value.trim();
+    const motherName = document.getElementById("motherName").value.trim();
+    const motherOccupation = document.getElementById("motherOccupation").value.trim();
+    const studentClass = document.getElementById("studentClass").value;
+    const school = document.getElementById("school").value.trim();
+    const address = document.getElementById("address").value.trim();
+    const previousInstitute = document.getElementById("previousInstitute").value.trim() || "Not provided";
+    const phoneNumber = document.getElementById("phoneNumber").value.trim();
+
+    const message = [
+      "NEWTON CLASSES - ADMISSION FORM",
+      "Learn Today. Lead Tomorrow.",
+      "",
+      "Name of Student: " + studentName,
+      "Father's Name: " + fatherName,
+      "Father's Occupation: " + fatherOccupation,
+      "Mother's Name: " + motherName,
+      "Mother's Occupation: " + motherOccupation,
+      "Class: " + studentClass,
+      "School: " + school,
+      "Address: " + address,
+      "Previous Institute/Coaching Centre: " + previousInstitute,
+      "Phone Number: " + phoneNumber
+    ].join("\n");
+
+    const whatsappURL =
+      "https://wa.me/918877546941?text=" + encodeURIComponent(message);
+
+    window.open(whatsappURL, "_blank");
+  });
+}
