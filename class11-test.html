@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#123c80">
+<title>Class 11 Mixed Test | NEWTON CLASSES</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#f0f6ff;color:#172554}
+header{background:#123c80;color:white;text-align:center;padding:22px 12px}
+header h1{margin:0 0 8px;font-size:25px}
+main{max-width:720px;margin:20px auto;padding:0 13px}
+.card{background:white;padding:20px;border-radius:15px;box-shadow:0 4px 15px #123c8012;margin-bottom:15px}
+.top{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;color:#475569;font-size:14px}
+.progress{height:8px;background:#e2e8f0;border-radius:9px;overflow:hidden;margin:14px 0}
+#bar{height:100%;width:0;background:#2563eb;transition:width .2s}
+#question{font-size:19px;line-height:1.55}
+.options{display:grid;gap:10px;margin-top:18px}
+.option{width:100%;text-align:left;padding:14px;border:2px solid #dbeafe;border-radius:10px;background:#f8fbff;color:#172554;font-size:16px;cursor:pointer}
+.option.selected{border-color:#2563eb;background:#dbeafe}
+.option:disabled{cursor:default}
+button.action,.home{display:block;width:100%;padding:14px;border:0;border-radius:10px;background:#123c80;color:white;font-size:16px;font-weight:bold;text-align:center;text-decoration:none;cursor:pointer;margin-top:15px}
+button.action:disabled{opacity:.5}
+.secondary{background:#e5efff!important;color:#123c80!important}
+.small{font-size:13px;color:#64748b;line-height:1.5}
+#result{text-align:center}
+#result h2{font-size:25px}
+.score{font-size:34px;font-weight:bold;color:#123c80;margin:15px 0}
+.hidden{display:none}
+footer{text-align:center;padding:12px;color:#64748b;font-size:13px}
+@media(max-width:400px){.card{padding:16px}#question{font-size:17px}}
+</style>
+</head>
+<body>
+<header>
+<h1>NEWTON CLASSES</h1>
+<p>Class 11 • Mixed Online Test</p>
+<p>Physics + Chemistry + Mathematics + Biology</p>
+</header>
+<main>
+<section class="card" id="quiz">
+<div class="top"><span id="counter">Question 1 of 20</span><span id="subject">Subject</span></div>
+<div class="progress"><div id="bar"></div></div>
+<h2 id="question"></h2>
+<div class="options" id="options"></div>
+<button class="action" id="next" disabled>Next Question →</button>
+<p class="small">Har question ka ek sahi jawab chunein.</p>
+</section>
+
+<section class="card hidden" id="result">
+<h2 id="resultTitle">Test Result</h2>
+<div class="score" id="score"></div>
+<p id="message"></p>
+<button class="action" onclick="startTest()">🔄 Retry Test</button>
+<a class="home secondary" href="./tests.html">← Choose Another Class</a>
+<a class="home" href="./index.html">Website Home</a>
+</section>
+</main>
+<footer>© NEWTON CLASSES</footer>
+
+<script src="./test-engine.js"></script>
+<script>
+const bank = [
+{ s:"Physics",q:"SI पद्धति में बल की इकाई क्या है?",o:["जूल","न्यूटन","वाट","पास्कल"],a:1},
+{ s:"Chemistry",q:"एक मोल में लगभग कितने कण होते हैं?",o:["6.022 × 10²³","3 × 10⁸","9.8","1.6 × 10⁻¹⁹"],a:0},
+{ s:"Mathematics",q:"यदि f(x)=2x+3, तो f(4) का मान क्या है?",o:["8","10","11","12"],a:2},
+{ s:"Biology",q:"कोशिका का ऊर्जा-उत्पादन करने वाला प्रमुख अंगक कौन-सा है?",o:["राइबोसोम","माइटोकॉन्ड्रिया","गॉल्जी बॉडी","लाइसोसोम"],a:1},
+{ s:"Physics",q:"वेग में परिवर्तन की दर को क्या कहते हैं?",o:["दूरी","त्वरण","संवेग","कार्य"],a:1},
+{ s:"Chemistry",q:"परमाणु क्रमांक किसकी संख्या बताता है?",o:["न्यूट्रॉन","प्रोटॉन","प्रोटॉन और न्यूट्रॉन का योग","कक्षाओं की संख्या"],a:1},
+{ s:"Mathematics",q:"sin 30° का मान क्या है?",o:["0","1","1/2","√3/2"],a:2},
+{ s:"Biology",q:"प्रकाश संश्लेषण में पौधे मुख्यतः कौन-सी गैस ग्रहण करते हैं?",o:["ऑक्सीजन","नाइट्रोजन","कार्बन डाइऑक्साइड","हाइड्रोजन"],a:2},
+{ s:"Physics",q:"न्यूटन का प्रथम नियम किस अवधारणा से संबंधित है?",o:["जड़त्व","ऊष्मा","विद्युत धारा","अपवर्तन"],a:0},
+{ s:"Chemistry",q:"शुद्ध जल का लगभग pH मान 25°C पर कितना होता है?",o:["2","5","7","10"],a:2},
+{ s:"Mathematics",q:"(a+b)² का सही विस्तार कौन-सा है?",o:["a²+b²","a²+2ab+b²","a²−2ab+b²","2a+2b"],a:1},
+{ s:"Biology",q:"मानव रक्त में ऑक्सीजन का परिवहन मुख्यतः कौन करता है?",o:["प्लेटलेट्स","हीमोग्लोबिन","प्लाज्मा प्रोटीन फाइब्रिनोजन","इंसुलिन"],a:1},
+{ s:"Physics",q:"यदि किसी वस्तु पर कुल बल शून्य है, तो उसका त्वरण कितना होगा?",o:["शून्य","हमेशा 9.8 m/s²","अनंत","हमेशा 1 m/s²"],a:0},
+{ s:"Chemistry",q:"NaCl में किस प्रकार का रासायनिक बंध प्रमुख है?",o:["आयनिक","धात्विक","हाइड्रोजन","केवल सहसंयोजक"],a:0},
+{ s:"Mathematics",q:"2, 4, 6, 8, ... इस श्रेणी का सार्व अंतर क्या है?",o:["1","2","4","6"],a:1},
+{ s:"Biology",q:"DNA का पूरा नाम क्या है?",o:["डाइऑक्सीन न्यूक्लिक एसिड","डीऑक्सीराइबोन्यूक्लिक एसिड","डाइराइबोज न्यूक्लिक एसिड","डायनामिक न्यूक्लियर एसिड"],a:1},
+{ s:"Physics",q:"कार्य का SI मात्रक क्या है?",o:["न्यूटन","जूल","एम्पियर","केल्विन"],a:1},
+{ s:"Chemistry",q:"आवर्त सारणी के एक ही समूह के तत्वों में सामान्यतः क्या समान होता है?",o:["न्यूट्रॉन की संख्या","बाहरी कोश के इलेक्ट्रॉनों की संख्या","परमाणु द्रव्यमान","सभी कोशों की संख्या"],a:1},
+{ s:"Mathematics",q:"यदि x²=49 और x एक वास्तविक संख्या है, तो x के संभावित मान क्या हैं?",o:["केवल 7","केवल −7","7 और −7","केवल 0"],a:2},
+{ s:"Biology",q:"पौधों में जल और खनिजों का परिवहन मुख्यतः कौन-सा ऊतक करता है?",o:["फ्लोएम","जाइलम","एपिडर्मिस","मेरिस्टेम"],a:1},
+{ s:"Physics",q:"प्रकाश निर्वात में लगभग किस चाल से चलता है?",o:["3 × 10⁶ m/s","3 × 10⁸ m/s","3 × 10¹⁰ m/s","300 m/s"],a:1},
+{ s:"Chemistry",q:"किस उपपरमाण्विक कण पर ऋणात्मक आवेश होता है?",o:["प्रोटॉन","न्यूट्रॉन","इलेक्ट्रॉन","नाभिक"],a:2},
+{ s:"Mathematics",q:"एक त्रिभुज के तीनों आंतरिक कोणों का योग कितना होता है?",o:["90°","180°","270°","360°"],a:1},
+{ s:"Biology",q:"मानव शरीर में इंसुलिन हार्मोन मुख्यतः कहाँ बनता है?",o:["थायरॉइड ग्रंथि","अग्न्याशय","अधिवृक्क ग्रंथि","पिट्यूटरी ग्रंथि"],a:1},
+{ s:"Physics",q:"संवेग का सूत्र कौन-सा है?",o:["द्रव्यमान × वेग","बल × दूरी","कार्य ÷ समय","द्रव्यमान × आयतन"],a:0},
+{ s:"Chemistry",q:"आधुनिक आवर्त नियम में तत्वों के गुण किसके आवर्ती फलन हैं?",o:["परमाणु द्रव्यमान","परमाणु क्रमांक","न्यूट्रॉन संख्या","घनत्व"],a:1},
+{ s:"Mathematics",q:"यदि किसी वृत्त की त्रिज्या r है, तो उसका क्षेत्रफल क्या होगा?",o:["2πr","πr²","πd","r²/2"],a:1},
+{ s:"Biology",q:"कोशिका में प्रोटीन संश्लेषण का प्रमुख स्थान कौन-सा है?",o:["राइबोसोम","लाइसोसोम","रिक्तिका","सेंट्रोसोम"],a:0},
+{ s:"Physics",q:"एक समान वृत्तीय गति में चाल स्थिर हो सकती है, जबकि कौन-सी राशि बदलती रहती है?",o:["द्रव्यमान","वेग की दिशा","समय","वृत्त की त्रिज्या"],a:1},
+{ s:"Chemistry",q:"ऑक्सीजन का सामान्य आणविक सूत्र क्या है?",o:["O","O₂","O₃ ही हमेशा","O₄"],a:1},
+{ s:"Mathematics",q:"यदि log₁₀ 100 = x, तो x कितना है?",o:["1","2","10","100"],a:1},
+{ s:"Biology",q:"पत्तियों में गैसों के आदान-प्रदान के लिए छोटे छिद्र क्या कहलाते हैं?",o:["रंध्र","जाइलम","बीजांड","परागकोष"],a:0},
+{ s:"Physics",q:"दूरी-समय ग्राफ की ढाल सामान्यतः क्या बताती है?",o:["द्रव्यमान","चाल","बल","ऊर्जा"],a:1},
+{ s:"Chemistry",q:"सहसंयोजक बंध सामान्यतः किस प्रक्रिया से बनता है?",o:["इलेक्ट्रॉनों के साझा करने से","केवल प्रोटॉन खोने से","न्यूट्रॉन के स्थानांतरण से","नाभिक टूटने से"],a:0},
+{ s:"Mathematics",q:"3x=21 होने पर x का मान क्या है?",o:["6","7","8","9"],a:1},
+{ s:"Biology",q:"मानव हृदय में सामान्यतः कितने कक्ष होते हैं?",o:["2","3","4","5"],a:2},
+{ s:"Physics",q:"गतिज ऊर्जा का सूत्र कौन-सा है?",o:["mv","½mv²","mgh","F/a"],a:1},
+{ s:"Chemistry",q:"किस कण का विद्युत आवेश शून्य होता है?",o:["प्रोटॉन","इलेक्ट्रॉन","न्यूट्रॉन","आयन"],a:2},
+{ s:"Mathematics",q:"एक पासे को एक बार फेंकने पर 6 आने की प्रायिकता क्या है?",o:["1/2","1/3","1/6","5/6"],a:2},
+{ s:"Biology",q:"पौधों में भोजन का परिवहन मुख्यतः कौन करता है?",o:["जाइलम","फ्लोएम","क्यूटिकल","रंध्र"],a:1}
+];
+
+const quiz = document.getElementById("quiz");
+const result = document.getElementById("result");
+const questionEl = document.getElementById("question");
+const optionsEl = document.getElementById("options");
+const counterEl = document.getElementById("counter");
+const subjectEl = document.getElementById("subject");
+const bar = document.getElementById("bar");
+const nextBtn = document.getElementById("next");
+
+let questions = [];
+let index = 0;
+let score = 0;
+let chosen = null;
+
+function shuffle(list) {
+  const copy = list.slice();
+  for (let i = copy.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [copy[i], copy[j]] = [copy[j], copy[i]];
+  }
+  return copy;
+}
+
+function startTest() {
+  questions = shuffle(bank).slice(0, 20).map(q => ({
+    ...q,
+    options: shuffle(q.o.map((label, value) => ({label, value})))
+  }));
+  index = 0;
+  score = 0;
+  chosen = null;
+  quiz.classList.remove("hidden");
+  result.classList.add("hidden");
+  renderQuestion();
+  window.scrollTo(0, 0);
+}
+
+function renderQuestion() {
+  const q = questions[index];
+  chosen = null;
+  counterEl.textContent = `Question ${index + 1} of ${questions.length}`;
+  subjectEl.textContent = q.s;
+  bar.style.width = `${(index / questions.length) * 100}%`;
+  questionEl.textContent = q.q;
+  optionsEl.replaceChildren();
+
+  q.options.forEach(option => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "option";
+    button.textContent = option.label;
+    button.addEventListener("click", () => {
+      chosen = option.value;
+      optionsEl.querySelectorAll("button").forEach(b => b.classList.remove("selected"));
+      button.classList.add("selected");
+      nextBtn.disabled = false;
+    });
+    optionsEl.appendChild(button);
+  });
+
+  nextBtn.disabled = true;
+  nextBtn.textContent = index === questions.length - 1 ? "Submit Test ✓" : "Next Question →";
+}
+
+nextBtn.addEventListener("click", () => {
+  if (chosen === null) return;
+
+  if (chosen === questions[index].a) score++;
+  index++;
+
+  if (index < questions.length) {
+    renderQuestion();
+  } else {
+    showResult();
+  }
+});
+
+function showResult() {
+  quiz.classList.add("hidden");
+  result.classList.remove("hidden");
+
+  const percentage = Math.round((score / questions.length) * 100);
+  const passed = percentage > 80;
+
+  document.getElementById("resultTitle").textContent =
+    passed ? "🎉 Congratulations!" : "💪 Keep Practising!";
+  document.getElementById("score").textContent =
+    `${score} / ${questions.length}`;
+  document.getElementById("message").textContent =
+    `${percentage}% — ` +
+    (passed
+      ? "शानदार प्रदर्शन! आपकी तैयारी अच्छी है।"
+      : "Doing Well but Need More Preparation. अभ्यास जारी रखें!");
+
+  if (window.NewtonTest && typeof window.NewtonTest.playResultSound === "function") {
+    window.NewtonTest.playResultSound(passed);
+  }
+
+  bar.style.width = "100%";
+  window.scrollTo(0, 0);
+}
+
+startTest();
+</script>
+</body>
+</html>
