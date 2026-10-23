@@ -1,1 +1,187 @@
 
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Online Test | NEWTON CLASSES</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#f1f5ff;color:#172554;
+font-family:Arial,sans-serif}
+header{background:#123b80;color:white;text-align:center;padding:22px 12px}
+header h1{margin:0;font-size:25px}
+header p{margin:8px 0 0}
+.container{max-width:720px;margin:20px auto;padding:14px}
+.card{background:white;border-radius:15px;padding:18px;
+box-shadow:0 4px 15px #00000012}
+.info{display:flex;justify-content:space-between;gap:8px;
+flex-wrap:wrap;margin-bottom:15px;font-size:14px}
+.progress{height:8px;background:#dbeafe;border-radius:10px;
+overflow:hidden;margin:12px 0 20px}
+#bar{height:100%;width:0;background:#2563eb}
+.question{border-bottom:1px solid #e5e7eb;padding:16px 0}
+.question h3{font-size:17px;line-height:1.5;margin:0 0 12px}
+.option{display:block;border:1px solid #cbd5e1;border-radius:9px;
+padding:12px;margin:8px 0;cursor:pointer;line-height:1.4}
+.option:has(input:checked){background:#dbeafe;border-color:#2563eb}
+.option input{margin-right:8px}
+button{width:100%;border:0;border-radius:9px;padding:14px;
+font-size:16px;font-weight:bold;cursor:pointer;margin-top:14px}
+.primary{background:#1d4ed8;color:white}
+.secondary{background:#e0e7ff;color:#1e3a8a}
+#result{display:none;text-align:center;padding:22px 8px}
+#result h2{color:#1d4ed8}
+.small{color:#64748b;font-size:13px}
+</style>
+</head>
+<body>
+<header>
+<h1>NEWTON CLASSES</h1>
+<p>Class 10 • Science + Mathematics</p>
+<p>Learn Today. Lead Tomorrow.</p>
+</header>
+
+<div class="container">
+<div class="card">
+<div id="test">
+<div class="info">
+<strong>Online MCQ Test</strong>
+<strong id="count">20 Questions</strong>
+</div>
+<p class="small">हर प्रश्न का एक सही उत्तर चुनें।</p>
+<div class="progress"><div id="bar"></div></div>
+<div id="questions"></div>
+<button class="primary" id="submit">Submit Test</button>
+<p class="small">हर नए प्रयास में सवालों का नया सेट मिलेगा।</p>
+</div>
+
+<div id="result">
+<h2>Test Result</h2>
+<h1 id="score"></h1>
+<p id="message"></p>
+<p id="detail"></p>
+<button class="primary" id="retry">Retry Test — नए सवाल</button>
+<button class="secondary" id="home">Website Home</button>
+</div>
+</div>
+</div>
+
+<script>
+const bank = [
+{ s:"math",q:"x² − 5x + 6 = 0 के मूल कौन-से हैं?",o:["2 और 3","1 और 6","−2 और −3","2 और 4"],a:0},
+{ s:"math",q:"sin 30° का मान क्या है?",o:["1","1/2","√3/2","0"],a:1},
+{ s:"math",q:"पहली 10 प्राकृतिक संख्याओं का योग कितना है?",o:["45","50","55","60"],a:2},
+{ s:"math",q:"बिंदु (0,0) और (3,4) के बीच दूरी कितनी है?",o:["4","5","6","7"],a:1},
+{ s:"math",q:"7, 3, 9, 5, 6 का median क्या है?",o:["5","6","7","9"],a:1},
+{ s:"math",q:"एक सिक्का उछालने पर Head आने की प्रायिकता क्या है?",o:["0","1/4","1/2","1"],a:2},
+{ s:"math",q:"वृत्त की परिधि का सूत्र क्या है?",o:["πr²","2πr","πd²","r²"],a:1},
+{ s:"math",q:"AP: 2, 5, 8, 11,... का common difference क्या है?",o:["2","3","5","6"],a:1},
+{ s:"math",q:"cos 60° का मान क्या है?",o:["0","1","1/2","√3/2"],a:2},
+{ s:"math",q:"यदि 2x + 3 = 11, तो x कितना है?",o:["3","4","5","7"],a:1},
+{ s:"math",q:"घन का आयतन क्या होता है?",o:["6a²","4a²","a³","a²"],a:2},
+{ s:"math",q:"sin²θ + cos²θ बराबर है?",o:["0","1","2","tan θ"],a:1},
+{ s:"math",q:"दो संख्याओं का HCF 6 और LCM 36 है। उनका गुणनफल कितना है?",o:["42","108","216","36"],a:2},
+{ s:"math",q:"त्रिज्या 7 cm वाले वृत्त का क्षेत्रफल (π=22/7) कितना है?",o:["44 cm²","154 cm²","49 cm²","308 cm²"],a:1},
+{ s:"math",q:"बहुपद x² − 9 के शून्यक कौन-से हैं?",o:["3, 3","−3, −3","3, −3","0, 9"],a:2},
+{ s:"math",q:"यदि tan θ = 1 और θ न्यून कोण है, तो θ कितना है?",o:["30°","45°","60°","90°"],a:1},
+{ s:"math",q:"बिंदुओं (2,3) और (4,7) का मध्यबिंदु क्या है?",o:["(3,5)","(2,5)","(6,10)","(3,4)"],a:0},
+{ s:"math",q:"एक पासा फेंकने पर सम संख्या आने की प्रायिकता क्या है?",o:["1/6","1/3","1/2","2/3"],a:2},
+{ s:"math",q:"x² + 4x + 4 का गुणनखंड क्या है?",o:["(x+4)²","(x+2)²","(x−2)²","x(x+4)"],a:1},
+{ s:"math",q:"समकोण त्रिभुज में कर्ण 13 और एक भुजा 5 है। दूसरी भुजा कितनी है?",o:["8","10","12","18"],a:2},
+
+{ s:"science",q:"विद्युत धारा की SI इकाई क्या है?",o:["वोल्ट","ओम","एम्पियर","वाट"],a:2},
+{ s:"science",q:"अम्ल नीले लिटमस पेपर को किस रंग में बदलता है?",o:["लाल","हरा","नीला","पीला"],a:0},
+{ s:"science",q:"प्रकाश संश्लेषण में पौधे मुख्यतः कौन-सी गैस लेते हैं?",o:["ऑक्सीजन","कार्बन डाइऑक्साइड","नाइट्रोजन","हाइड्रोजन"],a:1},
+{ s:"science",q:"मानव हृदय में कितने कक्ष होते हैं?",o:["2","3","4","5"],a:2},
+{ s:"science",q:"निकट दृष्टि दोष (Myopia) को ठीक करने के लिए कौन-सा लेंस प्रयोग होता है?",o:["उत्तल","अवतल","बेलनाकार","कोई नहीं"],a:1},
+{ s:"science",q:"शुद्ध जल का pH लगभग कितना होता है (25°C पर)?",o:["2","5","7","10"],a:2},
+{ s:"science",q:"धातुओं में विद्युत चालकता का मुख्य कारण क्या है?",o:["मुक्त इलेक्ट्रॉन","न्यूट्रॉन","प्रोटॉन","केवल आयन"],a:0},
+{ s:"science",q:"DNA का मुख्य कार्य क्या है?",o:["भोजन पचाना","आनुवंशिक जानकारी रखना","ऑक्सीजन पहुँचाना","रक्त जमाना"],a:1},
+{ s:"science",q:"ओम का नियम कौन-सा है?",o:["V=IR","P=VI²","R=VI","I=VR"],a:0},
+{ s:"science",q:"सोडियम का रासायनिक प्रतीक क्या है?",o:["S","So","Na","N"],a:2},
+{ s:"science",q:"ओजोन परत मुख्यतः किससे रक्षा करती है?",o:["इन्फ्रारेड किरणों","पराबैंगनी किरणों","रेडियो तरंगों","ध्वनि तरंगों"],a:1},
+{ s:"science",q:"मानव शरीर में रक्त को छानने का मुख्य कार्य कौन करता है?",o:["फेफड़े","गुर्दे","आमाशय","अग्न्याशय"],a:1},
+{ s:"science",q:"अवतल दर्पण किस स्थिति में वास्तविक प्रतिबिंब बना सकता है?",o:["वस्तु फोकस से बाहर हो","हर स्थिति में","केवल दर्पण के पीछे","कभी नहीं"],a:0},
+{ s:"science",q:"लोहे में जंग लगने के लिए मुख्यतः क्या आवश्यक है?",o:["केवल नाइट्रोजन","ऑक्सीजन और नमी","केवल सूर्य का प्रकाश","केवल कार्बन डाइऑक्साइड"],a:1},
+{ s:"science",q:"मानव में भोजन का अधिकांश अवशोषण कहाँ होता है?",o:["मुख","छोटी आँत","बड़ी आँत","ग्रासनली"],a:1},
+{ s:"science",q:"विद्युत शक्ति की SI इकाई क्या है?",o:["जूल","वाट","कूलॉम","एम्पियर"],a:1},
+{ s:"science",q:"आधुनिक आवर्त सारणी में तत्वों को किसके बढ़ते क्रम में रखा गया है?",o:["परमाणु द्रव्यमान","परमाणु संख्या","न्यूट्रॉन संख्या","घनत्व"],a:1},
+{ s:"science",q:"ग्रहों को सूर्य के चारों ओर कक्षा में बनाए रखने वाला बल कौन-सा है?",o:["घर्षण","चुंबकीय बल","गुरुत्वाकर्षण","विद्युत बल"],a:2},
+{ s:"science",q:"पौधों में जल और खनिजों का परिवहन मुख्यतः कौन करता है?",o:["फ्लोएम","जाइलम","रंध्र","क्लोरोफिल"],a:1},
+{ s:"science",q:"विद्युत परिपथ में फ्यूज तार किस प्रकार जुड़ा होता है?",o:["समानांतर","श्रेणीक्रम में","बैटरी से अलग","केवल अर्थ के साथ"],a:1}
+];
+
+let used = new Set();
+let current = [];
+let locked = false;
+
+function shuffle(arr){
+  arr = [...arr];
+  for(let i=arr.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [arr[i],arr[j]]=[arr[j],arr[i]];
+  }
+  return arr;
+}
+
+function newTest(){
+  if(bank.length-used.size<20) used.clear();
+  const available=bank.map((q,i)=>({...q,id:i}))
+    .filter(q=>!used.has(q.id));
+  current=shuffle(available).slice(0,20);
+  current.forEach(q=>used.add(q.id));
+  locked=false;
+  document.getElementById("test").style.display="block";
+  document.getElementById("result").style.display="none";
+  document.getElementById("count").textContent="20 Questions";
+  document.getElementById("bar").style.width="0%";
+  document.getElementById("questions").innerHTML=current.map((q,i)=>{
+    const opts=shuffle(q.o.map((label,j)=>({label,correct:j===q.a})));
+    q.shuffled=opts;
+    return `<div class="question">
+      <h3>${i+1}. ${q.q}</h3>
+      ${opts.map((op,j)=>`<label class="option">
+      <input type="radio" name="q${i}" value="${j}">
+      ${String.fromCharCode(65+j)}. ${op.label}</label>`).join("")}
+      </div>`;
+  }).join("");
+  document.getElementById("questions").onchange=()=>{
+    const n=document.querySelectorAll('#questions input:checked').length;
+    document.getElementById("bar").style.width=(n/20*100)+"%";
+  };
+  window.scrollTo(0,0);
+}
+
+document.getElementById("submit").onclick=()=>{
+  if(locked)return;
+  const answered=document.querySelectorAll('#questions input:checked').length;
+  if(answered<20 && !confirm(`आपने ${answered}/20 प्रश्नों के उत्तर दिए हैं। क्या फिर भी Submit करना है?`))return;
+  let score=0;
+  current.forEach((q,i)=>{
+    const chosen=document.querySelector(`input[name="q${i}"]:checked`);
+    if(chosen && q.shuffled[Number(chosen.value)].correct)score++;
+  });
+  locked=true;
+  document.getElementById("test").style.display="none";
+  document.getElementById("result").style.display="block";
+  document.getElementById("score").textContent=score+" / 20";
+  document.getElementById("message").textContent=
+    score>=16?"बहुत बढ़िया! शानदार प्रदर्शन।":
+    score>=10?"अच्छा प्रयास! अभ्यास जारी रखो।":"कोई बात नहीं, फिर से प्रयास करो!";
+  document.getElementById("detail").textContent=
+    "सही उत्तर: "+score+" • गलत/छूटे हुए: "+(20-score)+
+    " • प्रतिशत: "+(score*5)+"%";
+  window.scrollTo(0,0);
+};
+
+document.getElementById("retry").onclick=newTest;
+document.getElementById("home").onclick=()=>{
+  window.location.href="/newton-classes/";
+};
+
+newTest();
+</script>
+</body>
+</html>
+
