@@ -205,3 +205,289 @@
     animation: none;
   }
 }
+
+/* NEWTON CLASSES - Premium Class 10 Crash Course */
+.crash-premium {
+  --crash-blue: #0b2b60;
+  --crash-yellow: #ffd84d;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  margin: 32px auto;
+  padding: 28px;
+  max-width: 1200px;
+  border-radius: 24px;
+  color: #fff;
+  background:
+    radial-gradient(ellipse at 85% 10%, #1c63b5 0, transparent 40%),
+    linear-gradient(135deg, #071a3d, #0b3c80 58%, #071a3d);
+  box-shadow: 0 18px 45px rgba(7, 35, 78, .22);
+}
+
+.crash-glow {
+  position: absolute;
+  z-index: -1;
+  width: 260px;
+  height: 260px;
+  right: -90px;
+  top: 180px;
+  border-radius: 50%;
+  background: #1685ff;
+  filter: blur(100px);
+  opacity: .35;
+}
+
+.crash-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding-bottom: 22px;
+  border-bottom: 1px solid rgba(255,255,255,.18);
+}
+
+.crash-label {
+  font-size: 12px;
+  letter-spacing: 2px;
+  font-weight: 800;
+  color: #d7e8ff;
+}
+
+.crash-badge {
+  padding: 8px 12px;
+  border-radius: 30px;
+  background: var(--crash-yellow);
+  color: #10264b;
+  font-size: 11px;
+  font-weight: 900;
+}
+
+.crash-layout {
+  display: grid;
+  grid-template-columns: 1fr 0.9fr;
+  align-items: center;
+  gap: 30px;
+  padding: 28px 0;
+}
+
+.crash-copy {
+  min-width: 0;
+}
+
+.crash-kicker {
+  color: #9ecaff;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
+
+.crash-copy h2 {
+  margin: 12px 0;
+  color: #fff;
+  font-size: clamp(32px, 5vw, 54px);
+  line-height: 1.08;
+  letter-spacing: -1.5px;
+}
+
+.crash-copy h2 span {
+  color: var(--crash-yellow);
+}
+
+.crash-tagline {
+  color: #d5e5ff;
+  font-size: 15px;
+}
+
+.crash-start {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 22px 0;
+  padding-left: 14px;
+  border-left: 4px solid var(--crash-yellow);
+}
+
+.crash-start span {
+  color: #bcd5fa;
+  font-size: 11px;
+  letter-spacing: 1px;
+}
+
+.crash-start strong {
+  font-size: 19px;
+}
+
+.crash-price-card {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 12px;
+  align-items: center;
+  padding: 18px;
+  border: 1px solid rgba(255,255,255,.3);
+  border-radius: 16px;
+  background: rgba(255,255,255,.09);
+  backdrop-filter: blur(10px);
+}
+
+.crash-old-price,
+.crash-new-price {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 12px;
+  color: #d3e4ff;
+}
+
+.crash-old-price strong {
+  color: #fff;
+  font-size: 23px;
+  text-decoration: line-through;
+  text-decoration-color: #ff7777;
+}
+
+.crash-new-price strong {
+  color: var(--crash-yellow);
+  font-size: 32px;
+  line-height: 1.2;
+}
+
+.crash-saving {
+  grid-column: 1 / -1;
+  width: fit-content;
+  padding: 6px 10px;
+  border-radius: 6px;
+  color: #11264a;
+  background: var(--crash-yellow);
+  font-size: 11px;
+  font-weight: 900;
+}
+
+.crash-deadline {
+  margin-top: 16px;
+  padding: 12px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, .09);
+  color: #fff;
+  font-size: 13px;
+}
+
+.crash-deadline strong {
+  color: var(--crash-yellow);
+}
+
+.crash-note {
+  color: #d2e2fa;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.crash-enroll {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  padding: 15px 18px;
+  margin-top: 16px;
+  border-radius: 12px;
+  color: #08284f;
+  background: linear-gradient(135deg, #ffe879, #ffc928);
+  text-decoration: none;
+  font-weight: 900;
+  box-shadow: 0 8px 22px rgba(255, 201, 40, .2);
+  transition: transform .2s, box-shadow .2s;
+}
+
+.crash-enroll:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 25px rgba(255, 201, 40, .3);
+}
+
+.crash-whatsapp-note {
+  margin: 8px 0 0;
+  text-align: center;
+  color: #bcd5fa;
+  font-size: 11px;
+}
+
+.crash-image-wrap {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.22);
+  border-radius: 18px;
+  background: #eaf3ff;
+  box-shadow: 0 20px 40px rgba(0,0,0,.22);
+}
+
+.crash-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.crash-image-caption {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 13px;
+  color: #102d59;
+  background: #fff;
+}
+
+.crash-image-caption > span {
+  font-size: 28px;
+}
+
+.crash-image-caption div {
+  display: flex;
+  flex-direction: column;
+}
+
+.crash-image-caption small {
+  color: #526782;
+  margin-top: 2px;
+}
+
+.crash-footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 10px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(255,255,255,.18);
+  color: #c8ddfb;
+  font-size: 11px;
+}
+
+.crash-footer span:first-child {
+  color: #fff;
+  font-weight: 900;
+  letter-spacing: 1px;
+}
+
+@media (max-width: 700px) {
+  .crash-premium {
+    margin: 22px 12px;
+    padding: 19px;
+    border-radius: 18px;
+  }
+
+  .crash-layout {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding: 22px 0;
+  }
+
+  .crash-copy h2 {
+    font-size: 38px;
+  }
+
+  .crash-new-price strong {
+    font-size: 29px;
+  }
+
+  .crash-footer {
+    flex-direction: column;
+  }
+}
