@@ -1,170 +1,215 @@
-
 <!DOCTYPE html>
 <html lang="hi">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#123c80">
   <title>Online Tests | NEWTON CLASSES</title>
+
   <style>
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
       font-family: Arial, sans-serif;
       background: #f0f6ff;
       color: #172554;
     }
+
     header {
       background: #123c80;
       color: white;
       text-align: center;
-      padding: 26px 12px;
+      padding: 30px 14px;
     }
-    header h1 { margin: 0 0 8px; font-size: 27px; }
-    header p { margin: 5px 0; }
-    main { max-width: 720px; margin: 22px auto; padding: 0 14px; }
+
+    header h1 {
+      margin: 0 0 8px;
+      font-size: 28px;
+    }
+
+    header p {
+      margin: 6px 0;
+    }
+
+    main {
+      max-width: 650px;
+      margin: 25px auto;
+      padding: 0 15px;
+    }
+
     .card {
       background: white;
-      padding: 20px;
-      margin-bottom: 16px;
+      padding: 22px;
       border-radius: 16px;
-      box-shadow: 0 4px 14px #123c8012;
+      box-shadow: 0 4px 16px #123c8012;
     }
-    h2 { margin-top: 0; font-size: 21px; }
+
+    h2 {
+      margin: 0 0 10px;
+      font-size: 22px;
+    }
+
+    .description {
+      color: #475569;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
     .classes {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 12px;
+      gap: 14px;
     }
-    button, .home {
-      display: block;
-      width: 100%;
-      padding: 14px 10px;
-      border: 0;
-      border-radius: 10px;
-      background: #e5efff;
+
+    .class-button {
+      min-height: 95px;
+      border: 2px solid #d5e4ff;
+      border-radius: 14px;
+      background: #edf4ff;
       color: #123c80;
-      font-size: 16px;
+      font-size: 20px;
       font-weight: bold;
       cursor: pointer;
+      padding: 18px 8px;
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    .class-button span {
+      display: block;
+      margin-top: 7px;
+      font-size: 13px;
+      font-weight: normal;
+    }
+
+    .class-button:hover {
+      background: #dce9ff;
+      transform: translateY(-2px);
+    }
+
+    .class-button:focus-visible,
+    .home:focus-visible {
+      outline: 3px solid #f59e0b;
+      outline-offset: 3px;
+    }
+
+    .home {
+      display: block;
+      margin-top: 18px;
+      padding: 15px;
+      border-radius: 11px;
+      background: #123c80;
+      color: white;
       text-align: center;
       text-decoration: none;
+      font-weight: bold;
     }
-    button:focus, .home:focus { outline: 3px solid #f59e0b; }
-    button.selected { background: #123c80; color: white; }
-    .subjects { display: grid; gap: 10px; }
-    .subjects button { background: #eef4ff; }
-    .subjects button:disabled { opacity: .55; cursor: not-allowed; }
-    .small { color: #475569; font-size: 14px; line-height: 1.5; }
-    #notice { min-height: 24px; font-weight: bold; }
-    footer { text-align: center; padding: 12px 10px 28px; }
+
+    .rules {
+      margin-top: 18px;
+      color: #475569;
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    footer {
+      text-align: center;
+      padding: 15px 10px 28px;
+      color: #64748b;
+      font-size: 13px;
+    }
+
     @media (max-width: 360px) {
-      .classes { grid-template-columns: 1fr; }
-      .card { padding: 16px; }
+      .card {
+        padding: 16px;
+      }
+
+      .class-button {
+        font-size: 18px;
+      }
     }
   </style>
 </head>
+
 <body>
   <header>
     <h1>NEWTON CLASSES</h1>
     <p>Learn Today. Lead Tomorrow.</p>
-    <p>Online Test Centre • Class 9–12</p>
+    <p>🎯 Online Test Centre · Class 9–12</p>
   </header>
 
   <main>
     <section class="card">
       <h2>🎯 अपनी कक्षा चुनें</h2>
+
+      <p class="description">
+        अपनी कक्षा पर क्लिक करें और अपना 20 प्रश्नों वाला
+        ऑनलाइन टेस्ट शुरू करें।
+      </p>
+
       <div class="classes">
-        <button type="button" data-class="9">Class 9</button>
-        <button type="button" data-class="10">Class 10</button>
-        <button type="button" data-class="11">Class 11</button>
-        <button type="button" data-class="12">Class 12</button>
+        <button class="class-button" type="button"
+          onclick="openTest('9')">
+          Class 9
+          <span>Science + Mathematics</span>
+        </button>
+
+        <button class="class-button" type="button"
+          onclick="openTest('10')">
+          Class 10
+          <span>Science + Mathematics</span>
+        </button>
+
+        <button class="class-button" type="button"
+          onclick="openTest('11')">
+          Class 11
+          <span>Physics + Chemistry + Maths + Biology</span>
+        </button>
+
+        <button class="class-button" type="button"
+          onclick="openTest('12')">
+          Class 12
+          <span>Physics + Chemistry + Maths + Biology</span>
+        </button>
+      </div>
+
+      <div class="rules">
+        <strong>टेस्ट के नियम</strong>
+        <ul>
+          <li>हर टेस्ट में 20 MCQ प्रश्न होंगे।</li>
+          <li>हर प्रश्न में 4 विकल्प होंगे।</li>
+          <li>टेस्ट के बाद स्कोर और प्रतिशत दिखेगा।</li>
+          <li>Retry करके दोबारा टेस्ट दे सकते हैं।</li>
+        </ul>
       </div>
     </section>
 
-    <section class="card" aria-live="polite">
-      <h2 id="subject-title">📚 विषय चुनें</h2>
-      <p class="small">पहले अपनी कक्षा चुनें, फिर उपलब्ध विषय चुनें। हर टेस्ट में 20 MCQ होंगे।</p>
-      <div id="subjects" class="subjects">
-        <p class="small">कक्षा चुनने के बाद विषय यहाँ दिखाई देंगे।</p>
-      </div>
-      <p id="notice" role="status"></p>
-    </section>
-
-    <section class="card">
-      <h2>📝 टेस्ट के नियम</h2>
-      <ul>
-        <li>हर टेस्ट में 20 बहुविकल्पीय प्रश्न (MCQ)।</li>
-        <li>उत्तर देने के बाद Submit करके स्कोर देखें।</li>
-        <li>फिलहाल यह विषय चुनने वाला पेज है; अगले चरण में टेस्ट जोड़े जाएँगे।</li>
-      </ul>
-    </section>
-
-    <a class="home" href="./index.html">← Website Home</a>
+    <a class="home" href="./index.html">
+      ← Website Home
+    </a>
   </main>
 
-  <footer class="small">© NEWTON CLASSES</footer>
+  <footer>
+    © NEWTON CLASSES
+  </footer>
 
   <script>
-    const subjectsByClass = {
-      "9": [
-        ["Science", null],
-        ["Mathematics", null]
-      ],
-      "10": [
-        ["Science", "./quiz.html"],
-        ["Mathematics", null]
-      ],
-      "11": [
-        ["Physics", null],
-        ["Chemistry", null],
-        ["Mathematics", null],
-        ["Biology", null]
-      ],
-      "12": [
-        ["Physics", null],
-        ["Chemistry", null],
-        ["Mathematics", null],
-        ["Biology", null]
-      ]
-    };
+    function openTest(classNumber) {
+      const testPages = {
+        "9": "./class9-science.html",
+        "10": "./quiz.html",
+        "11": "./class11-test.html",
+        "12": "./class12-test.html"
+      };
 
-    const subjectBox = document.getElementById("subjects");
-    const title = document.getElementById("subject-title");
-    const notice = document.getElementById("notice");
-    let selectedClass = "";
+      const page = testPages[classNumber];
 
-    document.querySelectorAll("[data-class]").forEach(button => {
-      button.addEventListener("click", () => {
-        selectedClass = button.dataset.class;
-
-        document.querySelectorAll("[data-class]").forEach(item => {
-          item.classList.toggle("selected", item === button);
-        });
-
-        title.textContent = "📚 Class " + selectedClass + " — विषय चुनें";
-        notice.textContent = "";
-        subjectBox.replaceChildren();
-
-        subjectsByClass[selectedClass].forEach(([subject, url]) => {
-          const item = document.createElement("button");
-          item.type = "button";
-          item.textContent = subject + (url ? " — टेस्ट शुरू करें" : " — जल्द उपलब्ध");
-          item.disabled = !url;
-
-          item.addEventListener("click", () => {
-            if (url) window.location.href = url;
-          });
-
-          subjectBox.appendChild(item);
-        });
-
-        if (selectedClass !== "10") {
-          notice.textContent = "इस कक्षा के टेस्ट अगले चरण में जोड़े जाएँगे।";
-        } else {
-          notice.textContent = "Science का मौजूदा Class 10 टेस्ट उपलब्ध है।";
-        }
-      });
-    });
+      if (page) {
+        window.location.href = page;
+      }
+    }
   </script>
 </body>
 </html>
