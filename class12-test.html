@@ -1,0 +1,201 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Class 12 Online Test | NEWTON CLASSES</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#eef4ff;color:#172554}
+header{background:#123c8c;color:white;text-align:center;padding:22px 12px}
+header h1{margin:0;font-size:27px}
+header p{margin:8px 0 0}
+.container{max-width:760px;margin:20px auto;padding:14px}
+.card{background:white;border-radius:16px;padding:20px;box-shadow:0 5px 18px #173b7515}
+.progress{height:8px;background:#dbeafe;border-radius:20px;overflow:hidden;margin:12px 0 20px}
+#bar{height:100%;width:0;background:#2563eb;transition:width .2s}
+.option{display:block;width:100%;text-align:left;padding:13px;margin:10px 0;border:2px solid #dbeafe;border-radius:10px;background:white;color:#172554;font-size:16px;cursor:pointer}
+.option:hover{border-color:#2563eb}
+.option.selected{background:#dbeafe;border-color:#2563eb}
+button,.link{display:inline-block;border:0;border-radius:10px;padding:12px 18px;background:#1748a0;color:white;font-size:16px;cursor:pointer;text-decoration:none;margin:5px 4px 5px 0}
+button:disabled{opacity:.45;cursor:not-allowed}
+.small{color:#64748b;font-size:14px}
+#result{text-align:center}
+.score{font-size:36px;font-weight:bold;color:#1748a0}
+.hidden{display:none}
+footer{text-align:center;padding:18px;color:#64748b;font-size:13px}
+</style>
+</head>
+<body>
+<header>
+<h1>NEWTON CLASSES</h1>
+<p>Learn Today. Lead Tomorrow.</p>
+<p>Class 12 Online Test — Physics, Chemistry, Maths & Biology</p>
+</header>
+
+<div class="container">
+<div class="card" id="quiz">
+<div><b id="counter">Question 1 of 20</b><span style="float:right" id="answered">Answered: 0/20</span></div>
+<div class="progress"><div id="bar"></div></div>
+<h3 id="question"></h3>
+<div id="options"></div>
+<button id="next" onclick="nextQuestion()" disabled>Next Question →</button>
+</div>
+
+<div class="card hidden" id="result">
+<h2>Test Completed!</h2>
+<p>Your score</p>
+<div class="score" id="score"></div>
+<h3 id="message"></h3>
+<p id="details"></p>
+<button onclick="restart()">Retry Test ↻</button>
+<a class="link" href="./tests.html">All Classes</a>
+<a class="link" href="./index.html">Home</a>
+</div>
+</div>
+<footer>© NEWTON CLASSES • Keep learning, keep improving.</footer>
+
+<script>
+const bank = [
+{q:"What is the SI unit of electric potential?",o:["Ampere","Volt","Ohm","Watt"],a:1},
+{q:"The SI unit of capacitance is:",o:["Farad","Tesla","Henry","Weber"],a:0},
+{q:"Which law gives the direction of induced current?",o:["Ohm's law","Faraday's law","Lenz's law","Coulomb's law"],a:2},
+{q:"The power of a lens is measured in:",o:["Metre","Dioptre","Watt","Joule"],a:1},
+{q:"Which particle has no electric charge?",o:["Proton","Electron","Neutron","Positron"],a:2},
+{q:"The energy of a photon is:",o:["mc²","hν","IR","VIt"],a:1},
+{q:"In a p-type semiconductor, the majority charge carriers are:",o:["Electrons","Holes","Neutrons","Protons"],a:1},
+{q:"The SI unit of magnetic flux is:",o:["Tesla","Weber","Henry","Farad"],a:1},
+{q:"A transformer works on the principle of:",o:["Electrolysis","Mutual induction","Photoelectric effect","Diffusion"],a:1},
+{q:"The speed of electromagnetic waves in vacuum is approximately:",o:["3 × 10⁶ m/s","3 × 10⁸ m/s","3 × 10⁵ m/s","3 × 10¹⁰ m/s"],a:1},
+
+{q:"The pH of a neutral solution at 25°C is:",o:["0","5","7","14"],a:2},
+{q:"The oxidation state of oxygen in H₂O₂ is:",o:["−2","−1","0","+1"],a:1},
+{q:"Which of these is a strong acid?",o:["CH₃COOH","HCl","H₂CO₃","H₂O"],a:1},
+{q:"The IUPAC name of CH₃CH₂OH is:",o:["Methanol","Ethanal","Ethanol","Ethanoic acid"],a:2},
+{q:"The coordination number of cobalt in [Co(NH₃)₆]³⁺ is:",o:["3","4","6","8"],a:2},
+{q:"Which polymer is commonly used in non-stick cookware coating?",o:["PVC","Teflon","Nylon-6","Bakelite"],a:1},
+{q:"The unit of rate constant for a first-order reaction is:",o:["mol L⁻¹ s⁻¹","s⁻¹","L mol⁻¹ s⁻¹","mol² L⁻²"],a:1},
+{q:"Which element is present in chlorophyll?",o:["Iron","Magnesium","Calcium","Sodium"],a:1},
+{q:"Benzene generally undergoes:",o:["Addition reactions","Substitution reactions","Neutralisation only","Precipitation"],a:1},
+{q:"Which of these is a colligative property?",o:["Viscosity","Surface tension","Osmotic pressure","Colour"],a:2},
+
+{q:"The derivative of sin x is:",o:["cos x","−cos x","tan x","−sin x"],a:0},
+{q:"The integral of 1/x is:",o:["x² + C","ln|x| + C","1/x² + C","eˣ + C"],a:1},
+{q:"The determinant of [[1,2],[3,4]] is:",o:["2","−2","10","−10"],a:1},
+{q:"The slope of a line perpendicular to a line of slope 2 is:",o:["2","−2","1/2","−1/2"],a:3},
+{q:"The probability of getting a head on a fair coin is:",o:["0","1/4","1/2","1"],a:2},
+{q:"The magnitude of vector (3,4) is:",o:["3","4","5","7"],a:2},
+{q:"If A is an identity matrix, then A⁻¹ is:",o:["Zero matrix","A","−A","Undefined"],a:1},
+{q:"The derivative of eˣ is:",o:["xeˣ","eˣ","ln x","1/x"],a:1},
+{q:"The value of sin 90° is:",o:["0","1/2","1","√3/2"],a:2},
+{q:"A function is increasing when its derivative is:",o:["Negative","Positive","Always zero","Undefined everywhere"],a:1},
+
+{q:"The basic unit of heredity is:",o:["Cell","Tissue","Gene","Organ"],a:2},
+{q:"DNA stands for:",o:["Deoxyribonucleic acid","Dinucleic acid","Deoxyribose nitrogen acid","Double nitrogen acid"],a:0},
+{q:"Which organelle is known as the powerhouse of the cell?",o:["Ribosome","Mitochondrion","Golgi body","Lysosome"],a:1},
+{q:"The process by which plants make food is:",o:["Respiration","Transpiration","Photosynthesis","Fermentation"],a:2},
+{q:"Which blood cells help in clotting?",o:["Red blood cells","White blood cells","Platelets","Plasma cells"],a:2},
+{q:"The functional unit of the kidney is:",o:["Neuron","Nephron","Alveolus","Villus"],a:1},
+{q:"Insulin is produced by the:",o:["Thyroid gland","Pancreas","Adrenal gland","Pituitary gland"],a:1},
+{q:"Pollination is the transfer of pollen from:",o:["Root to stem","Anther to stigma","Leaf to flower","Ovary to ovule"],a:1},
+{q:"Which molecule carries genetic information in most organisms?",o:["DNA","Glucose","Lipid","Starch"],a:0},
+{q:"The pyramid of energy in an ecosystem is always:",o:["Inverted","Upright","Circular","Horizontal"],a:1}
+];
+
+let questions=[], index=0, answers=[], locked=false;
+
+function shuffle(arr){
+ const copy=[...arr];
+ for(let i=copy.length-1;i>0;i--){
+  const j=Math.floor(Math.random()*(i+1));
+  [copy[i],copy[j]]=[copy[j],copy[i]];
+ }
+ return copy;
+}
+
+function start(){
+ questions=shuffle(bank).slice(0,20).map(item=>{
+  const opts=item.o.map((text,i)=>({text,correct:i===item.a}));
+  const mixed=shuffle(opts);
+  return {q:item.q,o:mixed.map(x=>x.text),a:mixed.findIndex(x=>x.correct)};
+ });
+ index=0; answers=Array(20).fill(null); locked=false;
+ document.getElementById("quiz").classList.remove("hidden");
+ document.getElementById("result").classList.add("hidden");
+ render();
+}
+
+function render(){
+ const item=questions[index];
+ document.getElementById("counter").textContent=`Question ${index+1} of 20`;
+ document.getElementById("answered").textContent=`Answered: ${answers.filter(x=>x!==null).length}/20`;
+ document.getElementById("bar").style.width=`${index/20*100}%`;
+ document.getElementById("question").textContent=item.q;
+ const box=document.getElementById("options");
+ box.innerHTML="";
+ item.o.forEach((opt,i)=>{
+  const b=document.createElement("button");
+  b.className="option"+(answers[index]===i?" selected":"");
+  b.textContent=String.fromCharCode(65+i)+". "+opt;
+  b.onclick=()=>{
+   if(locked)return;
+   answers[index]=i;
+   render();
+  };
+  box.appendChild(b);
+ });
+ const next=document.getElementById("next");
+ next.disabled=answers[index]===null;
+ next.textContent=index===19?"Submit Test ✓":"Next Question →";
+}
+
+function nextQuestion(){
+ if(answers[index]===null)return;
+ if(index<19){index++;render();}
+ else showResult();
+}
+
+function playSound(success){
+ try{
+  const Ctx=window.AudioContext||window.webkitAudioContext;
+  if(!Ctx)return;
+  const ctx=new Ctx();
+  [660,success?880:440].forEach((freq,i)=>{
+   const osc=ctx.createOscillator(), gain=ctx.createGain();
+   osc.frequency.value=freq;osc.type="sine";
+   gain.gain.setValueAtTime(0.12,ctx.currentTime+i*.16);
+   gain.gain.exponentialRampToValueAtTime(0.001,ctx.currentTime+i*.16+.13);
+   osc.connect(gain);gain.connect(ctx.destination);
+   osc.start(ctx.currentTime+i*.16);osc.stop(ctx.currentTime+i*.16+.14);
+  });
+ }catch(e){}
+}
+
+function showResult(){
+ let score=0;
+ questions.forEach((q,i)=>{if(answers[i]===q.a)score++;});
+ const percent=Math.round(score/20*100);
+ document.getElementById("quiz").classList.add("hidden");
+ document.getElementById("result").classList.remove("hidden");
+ document.getElementById("score").textContent=`${score} / 20`;
+ document.getElementById("message").textContent=
+  percent>=80?"Excellent! Outstanding performance!":
+  percent>=60?"Good job! Keep practising!":
+  percent>=35?"Nice effort! Revise and try again.":
+  "Keep learning! Practice makes progress.";
+ document.getElementById("details").textContent=
+  `Percentage: ${percent}% • Correct: ${score} • Incorrect: ${20-score}`;
+ document.getElementById("bar").style.width="100%";
+ playSound(percent>=60);
+ window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function restart(){
+ start();
+ window.scrollTo({top:0,behavior:"smooth"});
+}
+start();
+</script>
+</body>
+</html>
