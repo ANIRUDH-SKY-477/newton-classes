@@ -1,0 +1,195 @@
+
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Class 9 Science | NEWTON CLASSES</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#eef5ff;color:#172554}
+header{background:#123c80;color:white;text-align:center;padding:22px 12px}
+main{max-width:720px;margin:20px auto;padding:0 12px}
+.card{background:white;border-radius:14px;padding:18px;margin-bottom:14px;box-shadow:0 3px 12px #123c8015}
+h1{font-size:25px;margin:0 0 8px}
+h2{font-size:21px}
+.small{color:#526078;font-size:14px;line-height:1.5}
+.question{border-top:1px solid #e2e8f0;padding:14px 0}
+.option{display:block;background:#f1f6ff;border-radius:9px;padding:12px;margin:8px 0;cursor:pointer}
+.option input{margin-right:8px}
+button,.home{display:block;width:100%;padding:14px;border:0;border-radius:9px;background:#123c80;color:white;font-weight:bold;font-size:16px;margin-top:10px;text-align:center;text-decoration:none;cursor:pointer}
+.secondary{background:#e5efff;color:#123c80}
+#result{display:none}
+#bar{height:8px;background:#1674e8;width:0%;transition:width .2s}
+.progress{background:#dbeafe;border-radius:9px;overflow:hidden}
+</style>
+</head>
+<body>
+<header>
+<h1>NEWTON CLASSES</h1>
+<p>Class 9 • Science</p>
+<p>Learn Today. Lead Tomorrow.</p>
+</header>
+<main>
+<section class="card" id="test">
+<h2>🧪 Online Science Test</h2>
+<p class="small">20 MCQ • हर प्रश्न का एक सही उत्तर चुनें।</p>
+<div class="progress"><div id="bar"></div></div>
+<p id="counter" class="small">0 / 20 उत्तर चुने गए</p>
+<div id="questions">टेस्ट लोड हो रहा है...</div>
+<button id="submit">Submit Test</button>
+<p id="notice" class="small" role="status"></p>
+</section>
+<section class="card" id="result">
+<h2>🏆 Test Result</h2>
+<h1 id="score"></h1>
+<p id="message"></p>
+<p id="detail"></p>
+<button id="retry">🔄 Retry Test — नए सवाल</button>
+<a class="home secondary" href="./tests.html">← सभी कक्षाएँ</a>
+<a class="home secondary" href="./index.html">Website Home</a>
+</section>
+</main>
+<script src="./test-engine.js"></script>
+<script>
+const rawBank = [
+["पदार्थ की सबसे छोटी इकाई जो उसके रासायनिक गुण बनाए रखती है, क्या है?",["परमाणु","कोशिका","ऊतक","अंग"],0],
+["बल की SI इकाई क्या है?",["जूल","न्यूटन","वाट","पास्कल"],1],
+["कोशिका का नियंत्रण केंद्र किसे कहते हैं?",["राइबोसोम","केंद्रक","रिक्तिका","कोशिका झिल्ली"],1],
+["वेग में परिवर्तन की दर क्या कहलाती है?",["दूरी","चाल","त्वरण","विस्थापन"],2],
+["पानी का रासायनिक सूत्र क्या है?",["CO₂","O₂","H₂O","NaCl"],2],
+["पौधों में प्रकाश संश्लेषण मुख्यतः कहाँ होता है?",["जड़","क्लोरोप्लास्ट","माइटोकॉन्ड्रिया","केंद्रक"],1],
+["ध्वनि किस माध्यम में यात्रा नहीं कर सकती?",["जल","वायु","निर्वात","ठोस"],2],
+["कार्य की SI इकाई क्या है?",["न्यूटन","जूल","मीटर","सेकंड"],1],
+["कोशिका की ऊर्जा मुद्रा किसे कहा जाता है?",["DNA","ATP","RNA","प्रोटीन"],1],
+["शुद्ध पदार्थ का उदाहरण कौन-सा है?",["मिट्टी","हवा","आसुत जल","दूध"],2],
+["गति का पहला नियम किस वैज्ञानिक से संबंधित है?",["न्यूटन","डार्विन","मेंडेल","आइंस्टीन"],0],
+["मानव शरीर में रक्त पंप करने वाला अंग कौन-सा है?",["फेफड़ा","हृदय","गुर्दा","यकृत"],1],
+["द्रव्यमान की SI इकाई क्या है?",["ग्राम","किलोग्राम","न्यूटन","लीटर"],1],
+["परमाणु के केंद्र में क्या होता है?",["केवल इलेक्ट्रॉन","प्रोटॉन और न्यूट्रॉन","केवल न्यूट्रॉन","केवल कक्षा"],1],
+["पौधे मिट्टी से पानी मुख्यतः किसके द्वारा लेते हैं?",["फूल","पत्ती","जड़","फल"],2],
+["किस अवस्था का निश्चित आकार और निश्चित आयतन होता है?",["ठोस","द्रव","गैस","वाष्प"],0],
+["विद्युत धारा की SI इकाई क्या है?",["वोल्ट","ओम","एम्पियर","वाट"],2],
+["जीवों की संरचनात्मक और क्रियात्मक इकाई क्या है?",["अंग","ऊतक","कोशिका","तंत्र"],2],
+["पृथ्वी वस्तुओं को किस बल से अपनी ओर खींचती है?",["घर्षण","चुंबकीय बल","गुरुत्वाकर्षण","विद्युत बल"],2],
+["वाष्पीकरण से सामान्यतः क्या प्रभाव होता है?",["ठंडक","गर्माहट","द्रव्यमान दोगुना","रंग बदलना"],0],
+["एक वस्तु 100 मीटर दूरी 20 सेकंड में तय करती है। औसत चाल क्या है?",["2 m/s","5 m/s","10 m/s","20 m/s"],1],
+["निम्न में से कौन-सा धातु है?",["सल्फर","ऑक्सीजन","ताँबा","कार्बन"],2],
+["पौधों में गैसों का आदान-प्रदान मुख्यतः किससे होता है?",["रंध्र","जड़ रोम","फूल","बीज"],0],
+["घनत्व निकालने के लिए किसे द्रव्यमान से भाग देते हैं?",["बल","आयतन","समय","तापमान"],1],
+["सामान्य वायुदाब पर पानी का क्वथनांक लगभग कितना है?",["0°C","50°C","100°C","200°C"],2]
+];
+
+const bank = rawBank.map((q,i)=>({
+ id:"s"+i,
+ question:q[0],
+ options:q[1].map((label,j)=>({label,value:j})),
+ answer:q[2]
+}));
+
+let questions=[];
+let submitted=false;
+const questionsEl=document.getElementById("questions");
+const counter=document.getElementById("counter");
+const bar=document.getElementById("bar");
+const notice=document.getElementById("notice");
+
+function shuffle(list){
+ const result=[...list];
+ for(let i=result.length-1;i>0;i--){
+  const j=Math.floor(Math.random()*(i+1));
+  [result[i],result[j]]=[result[j],result[i]];
+ }
+ return result;
+}
+
+function startTest(){
+ submitted=false;
+ document.getElementById("result").style.display="none";
+ document.getElementById("test").style.display="block";
+ document.getElementById("submit").disabled=false;
+ notice.textContent="";
+ questionsEl.replaceChildren();
+
+ questions=shuffle(bank).slice(0,20).map(q=>{
+  const options=shuffle(q.options);
+  return {...q,options};
+ });
+
+ questions.forEach((q,i)=>{
+  const block=document.createElement("div");
+  block.className="question";
+  const heading=document.createElement("p");
+  heading.textContent=(i+1)+". "+q.question;
+  block.appendChild(heading);
+
+  q.options.forEach(option=>{
+   const label=document.createElement("label");
+   label.className="option";
+   const radio=document.createElement("input");
+   radio.type="radio";
+   radio.name="q"+i;
+   radio.value=option.value;
+   radio.addEventListener("change",updateProgress);
+   label.append(radio,document.createTextNode(option.label));
+   block.appendChild(label);
+  });
+  questionsEl.appendChild(block);
+ });
+ updateProgress();
+ window.scrollTo(0,0);
+}
+
+function updateProgress(){
+ const answered=questions.filter((q,i)=>
+  document.querySelector('input[name="q'+i+'"]:checked')
+ ).length;
+ counter.textContent=answered+" / 20 उत्तर चुने गए";
+ bar.style.width=(answered/20*100)+"%";
+}
+
+document.getElementById("submit").addEventListener("click",()=>{
+ if(submitted)return;
+
+ const unanswered=questions.some((q,i)=>
+  !document.querySelector('input[name="q'+i+'"]:checked')
+ );
+ if(unanswered && !confirm("कुछ प्रश्न छूट गए हैं। क्या फिर भी टेस्ट जमा करना है?"))return;
+
+ let score=0;
+ questions.forEach((q,i)=>{
+  const chosen=document.querySelector('input[name="q'+i+'"]:checked');
+  if(chosen && Number(chosen.value)===q.answer)score++;
+ });
+
+ submitted=true;
+ document.getElementById("submit").disabled=true;
+ const result=window.NewtonTest
+  ? window.NewtonTest.getResult(score)
+  : {
+    score,
+    total:20,
+    percentage:Math.round(score/20*100),
+    success:score>=17,
+    message:score>=17
+      ?"🎉 Congratulations! 🏆 शानदार प्रदर्शन! 🌟"
+      :"💪 Doing Well but Need More Preparation 📚 मेहनत जारी रखो! 🚀"
+  };
+
+ document.getElementById("test").style.display="none";
+ document.getElementById("result").style.display="block";
+ document.getElementById("score").textContent=score+" / 20 ("+result.percentage+"%)";
+ document.getElementById("message").textContent=result.message;
+ document.getElementById("detail").textContent="सही उत्तर: "+score+" • गलत या छूटे प्रश्न: "+(20-score);
+
+ if(window.NewtonTest){
+  window.NewtonTest.playResultSound(result.success);
+ }
+ window.scrollTo(0,0);
+});
+
+document.getElementById("retry").addEventListener("click",startTest);
+startTest();
+</script>
+</body>
+</html>
