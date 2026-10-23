@@ -1,0 +1,296 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Help Centre | NEWTON CLASSES</title>
+  <meta name="description" content="Student Help Centre for NEWTON CLASSES. Get help with online tests, admission enquiries and student support.">
+
+  <style>
+    :root {
+      --blue: #0759c7;
+      --dark: #102b50;
+      --light: #eef5ff;
+      --white: #ffffff;
+      --text: #25344a;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f7fc;
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    header {
+      background: linear-gradient(135deg, #0649a8, #1685f8);
+      color: white;
+      text-align: center;
+      padding: 32px 16px;
+    }
+
+    .logo {
+      width: 85px;
+      height: 85px;
+      object-fit: contain;
+      margin-bottom: 8px;
+    }
+
+    header h1 {
+      margin: 5px 0;
+      font-size: 29px;
+    }
+
+    header p {
+      margin: 5px 0;
+    }
+
+    nav {
+      background: white;
+      padding: 12px;
+      text-align: center;
+      box-shadow: 0 2px 8px #0000000d;
+    }
+
+    nav a {
+      display: inline-block;
+      color: var(--blue);
+      text-decoration: none;
+      font-weight: bold;
+      margin: 5px 10px;
+    }
+
+    main {
+      max-width: 850px;
+      margin: 24px auto;
+      padding: 0 14px;
+    }
+
+    .welcome, .section, .faq, .contact {
+      background: white;
+      border-radius: 15px;
+      padding: 20px;
+      margin-bottom: 18px;
+      box-shadow: 0 4px 16px #153b6810;
+    }
+
+    h2 {
+      color: var(--dark);
+      margin-top: 0;
+      font-size: 22px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 13px;
+    }
+
+    .card {
+      border: 1px solid #dce8fa;
+      border-radius: 12px;
+      padding: 17px;
+      background: #fbfdff;
+    }
+
+    .card h3 {
+      margin-top: 0;
+      color: var(--blue);
+    }
+
+    .btn {
+      display: inline-block;
+      background: var(--blue);
+      color: white;
+      text-decoration: none;
+      padding: 11px 16px;
+      border-radius: 9px;
+      font-weight: bold;
+      margin-top: 5px;
+    }
+
+    .btn.whatsapp {
+      background: #128c50;
+    }
+
+    details {
+      border: 1px solid #dce6f4;
+      border-radius: 10px;
+      margin: 10px 0;
+      background: #fbfdff;
+      overflow: hidden;
+    }
+
+    summary {
+      padding: 14px;
+      cursor: pointer;
+      font-weight: bold;
+      color: var(--dark);
+    }
+
+    details p {
+      padding: 0 14px 14px;
+      margin: 0;
+    }
+
+    .note {
+      background: var(--light);
+      border-left: 4px solid var(--blue);
+      padding: 12px;
+      border-radius: 6px;
+    }
+
+    footer {
+      text-align: center;
+      background: var(--dark);
+      color: white;
+      padding: 22px 12px;
+      margin-top: 28px;
+    }
+
+    footer a {
+      color: #b8d9ff;
+    }
+
+    @media (max-width: 480px) {
+      header h1 {
+        font-size: 25px;
+      }
+
+      .welcome, .section, .faq, .contact {
+        padding: 16px;
+      }
+
+      nav a {
+        margin: 5px 6px;
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <img src="./newton-logo.png" alt="NEWTON CLASSES Logo" class="logo"
+         onerror="this.style.display='none'">
+    <h1>NEWTON CLASSES</h1>
+    <p><strong>Learn Today. Lead Tomorrow.</strong></p>
+    <p>Student Help Centre</p>
+  </header>
+
+  <nav>
+    <a href="./index.html">Home</a>
+    <a href="./tests.html">Online Tests</a>
+    <a href="#faqs">FAQs</a>
+    <a href="#contact">Contact Help</a>
+  </nav>
+
+  <main>
+    <section class="welcome">
+      <h2>Welcome, Students! 👋</h2>
+      <p>
+        Welcome to the NEWTON CLASSES Student Help Centre.
+        Yahan tum online tests, admission enquiries aur general student
+        support ke liye useful information paa sakte ho.
+      </p>
+      <p class="note">
+        <strong>Need help?</strong> Agar tumhe apne question ka answer
+        nahi milta, toh WhatsApp par message karo.
+      </p>
+      <a class="btn" href="./tests.html">Start Online Tests</a>
+    </section>
+
+    <section class="section">
+      <h2>Quick Help</h2>
+      <div class="cards">
+        <div class="card">
+          <h3>📝 Online Tests</h3>
+          <p>Available class-wise online tests open karo.</p>
+          <a class="btn" href="./tests.html">Open Tests</a>
+        </div>
+
+        <div class="card">
+          <h3>🎓 Admission Help</h3>
+          <p>Admission aur course-related information ke liye contact karo.</p>
+          <a class="btn whatsapp"
+             href="https://wa.me/918877546941?text=Hello%20NEWTON%20CLASSES%2C%20I%20need%20admission%20information."
+             target="_blank" rel="noopener">Ask on WhatsApp</a>
+        </div>
+
+        <div class="card">
+          <h3>💬 Student Support</h3>
+          <p>Website ya online test mein problem ho toh message bhejo.</p>
+          <a class="btn whatsapp"
+             href="https://wa.me/918877546941?text=Hello%20NEWTON%20CLASSES%2C%20I%20need%20student%20support."
+             target="_blank" rel="noopener">Get Help</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="faq" id="faqs">
+      <h2>Frequently Asked Questions</h2>
+
+      <details>
+        <summary>1. NEWTON CLASSES mein kaun-si classes ke students hain?</summary>
+        <p>Classes 6 se 12 tak ke students ke liye coaching information available hai. Specific class aur course details confirm karne ke liye WhatsApp par contact karo.</p>
+      </details>
+
+      <details>
+        <summary>2. Online test kaise start karun?</summary>
+        <p>Online Tests button par tap karo, apni class select karo aur available test open karo.</p>
+        <p><a href="./tests.html">Open Online Tests</a></p>
+      </details>
+
+      <details>
+        <summary>3. Test submit karne ke baad result kahan dikhega?</summary>
+        <p>Test ke result section mein tumhara score dikhega. Result screen par retry option available ho toh usse test dobara attempt kar sakte ho.</p>
+      </details>
+
+      <details>
+        <summary>4. Kya main test dobara de sakta hoon?</summary>
+        <p>Test page par diye gaye Retry ya Try Again button ka use karo, agar woh test mein available hai.</p>
+      </details>
+
+      <details>
+        <summary>5. Admission ke liye kaise contact karun?</summary>
+        <p>Admission information aur available courses ke baare mein poochhne ke liye WhatsApp button use karo.</p>
+      </details>
+
+      <details>
+        <summary>6. Agar website ya test open nahi ho raha toh kya karun?</summary>
+        <p>Internet connection check karo, page ko reload karo aur phir try karo. Problem bani rahe toh Student Support par message bhejo.</p>
+      </details>
+
+      <details>
+        <summary>7. Coaching ka address aur timings kaise pata karun?</summary>
+        <p>Address, class timings, fees aur batch availability ki latest details ke liye coaching se directly confirm karo.</p>
+      </details>
+    </section>
+
+    <section class="contact" id="contact">
+      <h2>Still Need Help?</h2>
+      <p>Humse apni problem share karo. Message mein apni class aur problem ka short description likhna helpful rahega.</p>
+      <p><strong>Location:</strong> Rajapakar, Vaishali, Bihar</p>
+      <p><strong>WhatsApp:</strong> 8877546941</p>
+      <a class="btn whatsapp"
+         href="https://wa.me/918877546941?text=Hello%20NEWTON%20CLASSES%2C%20I%20need%20help."
+         target="_blank" rel="noopener">Chat on WhatsApp</a>
+      <a class="btn" href="./index.html">Back to Home</a>
+    </section>
+  </main>
+
+  <footer>
+    <p><strong>NEWTON CLASSES</strong></p>
+    <p>Learn Today. Lead Tomorrow.</p>
+    <p>Rajapakar, Vaishali, Bihar</p>
+    <p><a href="./index.html">Home</a> · <a href="./tests.html">Online Tests</a></p>
+    <small>© NEWTON CLASSES. All rights reserved.</small>
+  </footer>
+</body>
+</html>
