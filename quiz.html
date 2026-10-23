@@ -205,6 +205,7 @@ document.getElementById("submit").onclick=()=>{
   document.getElementById("detail").textContent=
     "सही उत्तर: "+score+" • गलत/छूटे हुए: "+(20-score)+
     " • प्रतिशत: "+(score*5)+"%";
+  playResultSound(score >= 17);
   window.scrollTo(0,0);
 };
 
