@@ -166,9 +166,10 @@ document.getElementById("submit").onclick=()=>{
   document.getElementById("test").style.display="none";
   document.getElementById("result").style.display="block";
   document.getElementById("score").textContent=score+" / 20";
-  document.getElementById("message").textContent=
-    score>=16?"बहुत बढ़िया! शानदार प्रदर्शन।":
-    score>=10?"अच्छा प्रयास! अभ्यास जारी रखो।":"कोई बात नहीं, फिर से प्रयास करो!";
+  document.getElementById("message").textContent =
+  score >= 17
+    ? "🎉 Congratulations! 🏆 शानदार प्रदर्शन! ऐसे ही आगे बढ़ते रहो! 🌟"
+    : "💪 Doing Well but Need More Preparation 📚 मेहनत जारी रखो, तुम और बेहतर कर सकते हो! 🚀";
   document.getElementById("detail").textContent=
     "सही उत्तर: "+score+" • गलत/छूटे हुए: "+(20-score)+
     " • प्रतिशत: "+(score*5)+"%";
