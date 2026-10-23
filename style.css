@@ -487,3 +487,30 @@ tter-spacing:-1.4px}.hero-intro{font-size:14px;max-width:440px}.hero-art{width:7
     flex-direction: column;
   }
 }
+
+/* Class 10 Crash Course Home Page Button */
+.crash-home-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: linear-gradient(135deg, #ffe878, #ffbd20);
+  color: #10264a !important;
+  border: 2px solid #fff0a3;
+  border-radius: 12px;
+  padding: 14px 20px;
+  font-weight: 800;
+  text-decoration: none;
+  box-shadow: 0 6px 20px rgba(255, 190, 25, 0.3);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.crash-home-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(255, 190, 25, 0.4);
+}
+
+.crash-home-button:focus-visible {
+  outline: 3px solid #ffffff;
+  outline-offset: 3px;
+  }
