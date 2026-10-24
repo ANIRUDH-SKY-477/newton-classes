@@ -1,0 +1,5 @@
+
+User-agent: *
+Allow: /
+
+Sitemap: https://newton-classes.jo3.org/sitemap.xml
